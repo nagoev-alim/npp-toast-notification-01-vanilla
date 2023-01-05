@@ -1,0 +1,220 @@
+@import "assets/scss/config/fonts";
+@import "assets/scss/config/reset";
+@import "assets/scss/config/vars";
+@import "assets/scss/config/utility";
+@import "assets/scss/modules/typography";
+@import "assets/scss/modules/fields";
+@import "assets/scss/modules/buttons";
+@import "assets/scss/modules/toast";
+@import "assets/scss/config/global";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.app-author {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-container {
+  --gap: 15px;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: var(--bcs-grey-4);
+  padding: 10px;
+  transition: all 0.3s var(--ease-elastic-1);
+}
+
+.t-notifications {
+  --success: 10, 191, 48;
+  --error: 226, 77, 76;
+  --warning: 233, 189, 12;
+  --info: 52, 152, 219;
+
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05), 0 25px 35px rgba(0, 0, 0, 0.03);
+  max-width: max-content;
+  width: 100%;
+  display: grid;
+  gap: var(--gap);
+
+
+  .title {
+    text-align: center;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    @media (min-width: 576px) {
+      flex-direction: row;
+    }
+  }
+
+  .button {
+    color: #fff;
+
+    @media (min-width: 576px) {
+      max-width: max-content;
+    }
+
+    &--success {
+      background-color: rgb(var(--success));
+
+      &:hover {
+        background-color: rgba(var(--success), 0.8);
+      }
+    }
+
+    &--error {
+      background-color: rgb(var(--error));
+
+      &:hover {
+        background-color: rgba(var(--error), 0.8);
+      }
+    }
+
+    &--warning {
+      background-color: rgb(var(--warning));
+
+      &:hover {
+        background-color: rgba(var(--warning), 0.8);
+      }
+    }
+
+    &--info {
+      background-color: rgb(var(--info));
+
+      &:hover {
+        background-color: rgba(var(--info), 0.6);
+      }
+    }
+  }
+
+  ul {
+    --right: 20px;
+    position: fixed;
+    top: 30px;
+    right: var(--right);
+    display: grid;
+    gap: 10px;
+
+    li {
+      max-width: 400px;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      padding: 16px 17px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      position: relative;
+      background: #fff;
+      box-shadow: 0 0 3px 2px rgb(0 0 0 / 10%);
+      animation: showToast 0.3s ease forwards;
+
+      button {
+        padding: 4px;
+        border: 0;
+      }
+
+      &::before {
+        position: absolute;
+        content: '';
+        height: 3px;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        animation: progress 5s linear forwards;
+      }
+
+      &.success {
+        i:nth-child(1) {
+          color: rgb(var(--success));
+        }
+
+        &::before {
+          background-color: rgb(var(--success));
+        }
+      }
+
+      &.error {
+        i:nth-child(1) {
+          color: rgb(var(--error));
+        }
+
+        &::before {
+          background-color: rgb(var(--error));
+        }
+      }
+
+      &.warning {
+        i:nth-child(1) {
+          color: rgb(var(--warning));
+        }
+
+        &::before {
+          background-color: rgb(var(--warning));
+        }
+      }
+
+      &.info {
+        i:nth-child(1) {
+          color: rgb(var(--info));
+        }
+
+        &::before {
+          background-color: rgb(var(--info));
+        }
+      }
+
+      &.hide {
+        animation: hideToast 0.3s ease forwards;
+      }
+    }
+  }
+}
+
+@keyframes showToast {
+  0% {
+    transform: translateX(100%);
+  }
+  40% {
+    transform: translateX(-5%);
+  }
+  80% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes hideToast {
+  0% {
+    transform: translateX(-10px);
+  }
+  40% {
+    transform: translateX(0%);
+  }
+  80% {
+    transform: translateX(-5%);
+  }
+  100% {
+    transform: translateX(calc(100% + 20px));
+  }
+}
+
+@keyframes progress {
+  100% {
+    width: 0;
+  }
+}
